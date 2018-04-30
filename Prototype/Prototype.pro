@@ -82,6 +82,11 @@ macx {
     INCLUDEPATH += /Library/Frameworks/SDL2.framework/Headers
     LIBS += -framework SDL2
 }
+unix {
+    # Install framework from "http://libsdl.org/release/SDL2-2.0.3.dmg"
+    INCLUDEPATH += $${THIRDPARTY}/Sdl/include
+    LIBS += -lSDL2
+}
 
 # =====  OpenGL Mathematics (GLM) = http://glm.g-truc.net ==========================================
 win32 | unix {
@@ -118,6 +123,16 @@ macx {
     LIBS += -L$${THIRDPARTY}/Bullet/src/LinearMath
     LIBS += -lBulletCollision -lBulletDynamics -lLinearMath
 }
+unix {
+    # Clone branch "master" from "https://github.com/bulletphysics/bullet3.git"
+    # Use CMake to generate "Unix Makefiles" with "Use default native compilers"
+    # "Configure", "Generate" and "make" from command line
+    INCLUDEPATH += $${THIRDPARTY}/Bullet/src
+    LIBS += -L$${THIRDPARTY}/Bullet/src/BulletCollision
+    LIBS += -L$${THIRDPARTY}/Bullet/src/BulletDynamics
+    LIBS += -L$${THIRDPARTY}/Bullet/src/LinearMath
+    LIBS += -lBulletDynamics -lBulletCollision -lLinearMath
+}
 
 # =====  Open Asset Import Library = http://assimp.sf.net ==========================================
 win32 {
@@ -134,6 +149,14 @@ win32 {
     }
 }
 macx {
+    # Clone branch "master" from "https://github.com/assimp/assimp.git"
+    # Use CMake to generate "Unix Makefiles" with "Use default native compilers"
+    # "Configure", uncheck "BUILD_SHARED_LIBS", "Generate" and "make" from command line
+    INCLUDEPATH += $${THIRDPARTY}/Assimp/include
+    LIBS += -L$${THIRDPARTY}/Assimp/lib
+    LIBS += -lassimp -lz
+}
+unix {
     # Clone branch "master" from "https://github.com/assimp/assimp.git"
     # Use CMake to generate "Unix Makefiles" with "Use default native compilers"
     # "Configure", uncheck "BUILD_SHARED_LIBS", "Generate" and "make" from command line
